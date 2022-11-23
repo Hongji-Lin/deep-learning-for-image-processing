@@ -39,7 +39,7 @@ def main():
     # [C, H, W] -> [N, C, H, W]
     input_tensor = torch.unsqueeze(img_tensor, dim=0)
 
-    cam = GradCAM(model=model, target_layers=target_layers, use_cuda=False)
+    cam = GradCAM(model=model, target_layers=target_layers, use_cuda=False)  # 如果用GPU的话就改为True
     target_category = 281  # tabby, tabby cat
     # target_category = 254  # pug, pug-dog
 
