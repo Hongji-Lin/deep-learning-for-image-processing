@@ -10,7 +10,7 @@ from utils import GradCAM, show_cam_on_image, center_crop_img
 
 def main():
     model = models.mobilenet_v3_large(pretrained=True)
-    target_layers = [model.features[-1]]
+    target_layers = [model.features[-1]]    # 这是个列表，可以传入多个层结构
 
     # model = models.vgg16(pretrained=True)
     # target_layers = [model.features]
