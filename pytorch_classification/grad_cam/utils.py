@@ -12,10 +12,13 @@ class ActivationsAndGradients:
         self.activations = []
         self.reshape_transform = reshape_transform
         self.handles = []
-        for target_layer in target_layers:
+        for target_layer in target_layers:    # 遍历传入的target_layers(网络层结构）
             self.handles.append(
                 target_layer.register_forward_hook(
                     self.save_activation))
+            # 针对每个target_layer注册一个正向传播的钩子函数，注册完这个钩子函数之后，
+            # 在网络正向传播的时候，当数据通过我们指定的target_layer之后，就会将数据传给save_activation这个函数
+
             # Backward compatibility with older pytorch versions:
             if hasattr(target_layer, 'register_full_backward_hook'):
                 self.handles.append(
@@ -61,9 +64,8 @@ class GradCAM:
         self.cuda = use_cuda
         if self.cuda:
             self.model = model.cuda()
-        self.activations_and_grads = ActivationsAndGradients(
-            self.model, target_layers, reshape_transform)
-
+        self.activations_and_grads = ActivationsAndGradients(self.model, target_layers, reshape_transform)
+                                    # ActivationsAndGradients这个类是实现如何去捕获网络在正向传播得到特征层A，以及方向传播得到的A'
     """ Get a vector of weights for every channel in the target layer.
         Methods that return weights channels,
         will typically need to only implement this function. """
