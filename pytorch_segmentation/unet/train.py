@@ -61,7 +61,7 @@ def create_model(num_classes):
 def main(args):
     device = torch.device(args.device if torch.cuda.is_available() else "cpu")
     batch_size = args.batch_size
-    # segmentation nun_classes + background
+    # segmentation num_classes + background
     num_classes = args.num_classes + 1
 
     # using compute_mean_std.py

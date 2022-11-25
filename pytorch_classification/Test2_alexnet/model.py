@@ -22,7 +22,7 @@ class AlexNet(nn.Module):
         )
         self.classifier = nn.Sequential(
             nn.Dropout(p=0.5),
-            nn.Linear(128 * 6 * 6, 2048),
+            nn.Linear(128 * 6 * 6, 2048),  # (输入尺寸，输出尺寸)
             nn.ReLU(inplace=True),
             nn.Dropout(p=0.5),
             nn.Linear(2048, 2048),
@@ -41,7 +41,7 @@ class AlexNet(nn.Module):
     def _initialize_weights(self):
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
-                nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')
+                nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')   # 用kaiming_normal_方法初始化卷积层的权重
                 if m.bias is not None:
                     nn.init.constant_(m.bias, 0)
             elif isinstance(m, nn.Linear):
